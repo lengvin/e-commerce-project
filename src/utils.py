@@ -3,6 +3,9 @@ import json
 
 
 def read_json_file(file_path):
+    """
+    Открытие JSON-файла
+    """
     try:
         with open(file_path, encoding='utf-8') as file:
             json_file = json.load(file)
@@ -14,6 +17,9 @@ def read_json_file(file_path):
 
 
 def create_product(data):
+    """
+    Создание продукта из словаря
+    """
     product_dict = {}
     for key, value in data.items():
         product_dict[key] = value
@@ -25,6 +31,9 @@ def create_product(data):
 
 
 def create_category(file):
+    """
+    Создание категории из словаря
+    """
     category_dict = {}
     result_list = []
     for data in file:
