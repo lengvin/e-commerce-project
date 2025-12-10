@@ -38,7 +38,7 @@ class Product:
     def __init__(self, name, description, prise, quantity):
         self.name = name
         self.description = description
-        self.price = prise
+        self.__price = prise
         self.quantity = quantity
 
         Product.all_products[self.name] = self
@@ -58,3 +58,15 @@ class Product:
             cls.all_products[product.name] = product
 
             return product
+
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self, new_price):
+        if new_price <= 0:
+            print('Цена не должна быть нулевая или отрицательная')
+        else:
+            self.__price = new_price
+            return self.__price
