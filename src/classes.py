@@ -33,8 +33,28 @@ class Product:
     price: float
     quantity: int
 
+    all_products = {}
+
     def __init__(self, name, description, prise, quantity):
         self.name = name
         self.description = description
         self.price = prise
         self.quantity = quantity
+
+        Product.all_products[self.name] = self
+
+    @classmethod
+    def new_product(cls, data):
+        product = cls(data['name'], data['description'], data['price'], data['quantity'])
+        if product.name in [key for key in cls.all_products.keys()]:
+            present_product = cls.all_products[product.name]
+
+            if present_product.price != product.price:
+                present_product.price = max(product.price, present_product.price)
+            present_product.quantity += product.quantity
+
+            return present_product
+        else:
+            cls.all_products[product.name] = product
+
+            return product
