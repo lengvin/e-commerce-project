@@ -65,8 +65,21 @@ class Product:
 
     @price.setter
     def price(self, new_price):
+        new_price = float(new_price)
+
         if new_price <= 0:
             print('Цена не должна быть нулевая или отрицательная')
         else:
-            self.__price = new_price
-            return self.__price
+            if self.__price > new_price:
+                print('Вы точно хотите понизить цену? Введите y - если да или n - если нет')
+                while True:
+                    user_input = input().lower()
+                    if user_input == 'y':
+                        self.__price = new_price
+                        break
+                    elif user_input == 'n':
+                        break
+                    else:
+                        print('Некорректный ввод, повторите попытку')
+            else:
+                self.__price = new_price
