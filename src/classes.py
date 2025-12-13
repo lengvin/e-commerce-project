@@ -11,12 +11,13 @@ class Category:
         self.name = name
         self.description = description
         self.__products = products
-        Category.product_count += len(products)
+        Category.product_count += len(self.__products)
         Category.category_count += 1
 
     def add_product(self, product):
-        self.__products.append(product)
-        Category.product_count += 1
+        if product not in self.__products:
+            self.__products.append(product)
+            Category.product_count += 1
 
     @property
     def products(self):
@@ -35,27 +36,26 @@ class Product:
 
     all_products = {}
 
-    def __init__(self, name, description, prise, quantity):
+    def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.__price = prise
+        self.__price = price
         self.quantity = quantity
 
         Product.all_products[self.name] = self
 
     @classmethod
     def new_product(cls, data):
-        product = cls(data['name'], data['description'], data['price'], data['quantity'])
-        if product.name in [key for key in cls.all_products.keys()]:
-            present_product = cls.all_products[product.name]
+        if data['name'] in [key for key in cls.all_products.keys()]:
+            present_product = cls.all_products[data['name']]
 
-            if present_product.price != product.price:
-                present_product.price = max(product.price, present_product.price)
-            present_product.quantity += product.quantity
+            if present_product.price != data['price']:
+                present_product.price = max(data['price'], present_product.price)
+            present_product.quantity += data['quantity']
 
             return present_product
         else:
-            cls.all_products[product.name] = product
+            product = cls(data['name'], data['description'], data['price'], data['quantity'])
 
             return product
 
@@ -83,3 +83,27 @@ class Product:
                         print('Некорректный ввод, повторите попытку')
             else:
                 self.__price = new_price
+
+
+# product1 = Product('1', '1', 1, 1)
+# productN = Product.new_product({'name': '2',
+#                                 'description': '2',
+#                                 'price': 2,
+#                                 'quantity': 2})
+# print(Product.all_products)
+# print(product1.quantity)
+# print(productN.quantity)
+#
+# category1 = Category('aaa', 'aaa', [product1])
+# print(Product.all_products)
+# print(product1.quantity)
+# print(productN.quantity)
+# print(category1.product_count)
+# print(category1.products)
+#
+# category1.add_product(productN)
+# print(Product.all_products)
+# print(product1.quantity)
+# print(productN.quantity)
+# print(category1.product_count)
+# print(category1.products)
