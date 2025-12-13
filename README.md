@@ -13,7 +13,7 @@ git clone https://github.com/lengvin/e-commerce-project.git
 
 ## Тестирование:
 
-Все модули покрыты тестами на 100%
+Все модули покрыты тестами на 82%
 
 ## Модуль classes.py
 
@@ -26,6 +26,16 @@ from classes import Category
 category = Category(name, description, products)
 ```
 
+#### Метод add_product
+
+Метод для добавления нового продукта в уже созданную категорию, пример использования:
+```
+from classes import Category
+
+category = Category(name, description, [product1])
+category.add_product(product2)
+```
+
 ### Класс Product
 
 Класс для создания объекта продукта, который хранит в себе информацию о продукте, пример использования:
@@ -33,6 +43,16 @@ category = Category(name, description, products)
 from classes import Product
 
 product = Product(name, description, price, quantity)
+```
+
+#### Метод new_product
+
+Метод для создания нового продукта, позволяющий в случае создания уже существуючего продукта заменить в нём информацию на новую, вместо создания нового продукта, пример использования:
+```
+from classes import Product
+
+product1 = Product.new_product(name, description, price1, quantity1)
+product2 = Product.new_product(name, desctiption, price2, quantity2)
 ```
 
 ## Модуль utils.py
