@@ -26,7 +26,7 @@ class Category:
     def products(self):
         result = ''
         for product in self.__products:
-            result += str(product)
+            result += str(product) + ' \n'
         return result
 
 
@@ -93,14 +93,3 @@ class Product:
                         print('Некорректный ввод, повторите попытку')
             else:
                 self.__price = new_price
-
-
-# product1 = Product('1', '1', 1, 1)
-# productN = Product.new_product({'name': '2',
-#                                 'description': '2',
-#                                 'price': 2,
-#                                 'quantity': 2})
-# print(productN + product1)
-#
-# category1 = Category('aaa', 'aaa', [product1])
-#
