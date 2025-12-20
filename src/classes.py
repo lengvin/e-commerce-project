@@ -50,6 +50,10 @@ class Product:
     def __str__(self):
         return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
 
+    def __add__(self, other):
+        result = self.__price * self.quantity + other.price * other.quantity
+        return result
+
     @classmethod
     def new_product(cls, data):
         if data['name'] in [key for key in cls.all_products.keys()]:
@@ -96,10 +100,7 @@ class Product:
 #                                 'description': '2',
 #                                 'price': 2,
 #                                 'quantity': 2})
-# print(productN)
-# print(product1)
+# print(productN + product1)
 #
 # category1 = Category('aaa', 'aaa', [product1])
 #
-# print(category1)
-# print(category1.products)
