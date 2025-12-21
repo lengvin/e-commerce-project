@@ -15,7 +15,8 @@ class Category:
         Category.category_count += 1
 
     def __str__(self):
-        return f'{self.name}, количество продуктов: {len(self.__products)}'
+        category_products_count = sum([product.quantity for product in self.__products])
+        return f'{self.name}, количество продуктов: {category_products_count}'
 
     def add_product(self, product):
         if product not in self.__products:
