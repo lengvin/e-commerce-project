@@ -113,6 +113,12 @@ class Smartphone(Product):
         self.memory = memory
         self.color = color
 
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return super().__add__(other)
+        else:
+            raise TypeError
+
 
 class LawnGrass(Product):
     name: str
@@ -128,3 +134,10 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return super().__add__(other)
+        else:
+            raise TypeError
+
