@@ -13,7 +13,7 @@ git clone https://github.com/lengvin/e-commerce-project.git
 
 ## Тестирование:
 
-Все модули покрыты тестами на 82%
+Все модули покрыты тестами на 85%
 
 ## Модуль classes.py
 
@@ -53,6 +53,24 @@ from classes import Product
 
 product1 = Product.new_product(name, description, price1, quantity1)
 product2 = Product.new_product(name, desctiption, price2, quantity2)
+```
+
+### Класс Smartphone
+
+Подкласс класса Product. Класс для создания объекта продукта смартфона, который хранит в себе информацию о смартфоне, пример испоьзования:
+```
+from classes import Smartphone
+
+smartphone = Smartphone(name, description, price, quantity, efficiency, model, memory, color)
+```
+
+### Класс LawGrass
+
+Подкласс класса Product. Класс для создания объекта продукта травы газонной, который хранит в себе информацию о траве газоне, пример использования:
+```
+from classes import LawGras
+
+law_grass = LawGrass(name, description, price, quantity, country, germination_period, color)
 ```
 
 ## Модуль utils.py
