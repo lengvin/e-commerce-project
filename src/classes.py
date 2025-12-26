@@ -14,6 +14,10 @@ class Category:
         Category.product_count += len(self.__products)
         Category.category_count += 1
 
+    def __str__(self):
+        category_products_count = sum([product.quantity for product in self.__products])
+        return f'{self.name}, количество продуктов: {category_products_count}'
+
     def add_product(self, product):
         if product not in self.__products:
             self.__products.append(product)
@@ -23,7 +27,7 @@ class Category:
     def products(self):
         result = ''
         for product in self.__products:
-            result = result + f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт. \n'
+            result += str(product) + ' \n'
         return result
 
 
@@ -43,6 +47,13 @@ class Product:
         self.quantity = quantity
 
         Product.all_products[self.name] = self
+
+    def __str__(self):
+        return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
+
+    def __add__(self, other):
+        result = self.__price * self.quantity + other.price * other.quantity
+        return result
 
     @classmethod
     def new_product(cls, data):
@@ -83,27 +94,3 @@ class Product:
                         print('Некорректный ввод, повторите попытку')
             else:
                 self.__price = new_price
-
-
-# product1 = Product('1', '1', 1, 1)
-# productN = Product.new_product({'name': '2',
-#                                 'description': '2',
-#                                 'price': 2,
-#                                 'quantity': 2})
-# print(Product.all_products)
-# print(product1.quantity)
-# print(productN.quantity)
-#
-# category1 = Category('aaa', 'aaa', [product1])
-# print(Product.all_products)
-# print(product1.quantity)
-# print(productN.quantity)
-# print(category1.product_count)
-# print(category1.products)
-#
-# category1.add_product(productN)
-# print(Product.all_products)
-# print(product1.quantity)
-# print(productN.quantity)
-# print(category1.product_count)
-# print(category1.products)

@@ -68,3 +68,10 @@ def test_add_products(new_product, some_category, some_product):
     assert some_category.product_count == 2
     assert some_category.products == ('test_name, 1000.0 руб. Остаток: 5 шт. \n'
                                       'test_new_product, 5000.0 руб. Остаток: 6 шт. \n')
+
+
+def test_sum_products():
+    product1 = Product('test_name1', '', 5, 2)
+    product2 = Product('test_name2', '', 6, 3)
+    result = product1 + product2
+    assert result == 28
