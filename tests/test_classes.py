@@ -44,9 +44,9 @@ def smartphone():
 
 
 @pytest.fixture
-def law_grass():
-    test_law_grass = LawnGrass('test_name', 'test_description', 5, 5, 'test_country', 'test_days', 'test_color')
-    return test_law_grass
+def lawn_grass():
+    test_lawn_grass = LawnGrass('test_name', 'test_description', 5, 5, 'test_country', 'test_days', 'test_color')
+    return test_lawn_grass
 
 
 def test_init_product(some_product):
@@ -103,14 +103,14 @@ def test_init_smartphone(smartphone, capsys):
     assert smartphone.color == 'test_color'
 
 
-def test_init_law_grass(law_grass, capsys):
+def test_init_lawn_grass(lawn_grass, capsys):
     test_log_law_grass = LawnGrass('test_name', 'test_description', 5, 5, 'test_country', 'test_days', 'test_color')
     captured = capsys.readouterr()
     assert captured.out == "<class 'src.classes.LawnGrass'>(test_name, test_description, 5, 5, test_country, test_days, test_color)\n"
-    assert law_grass.name == 'test_name'
-    assert law_grass.description == 'test_description'
-    assert law_grass.price == 5
-    assert law_grass.quantity == 5
-    assert law_grass.country == 'test_country'
-    assert law_grass.germination_period == 'test_days'
-    assert law_grass.color == 'test_color'
+    assert lawn_grass.name == 'test_name'
+    assert lawn_grass.description == 'test_description'
+    assert lawn_grass.price == 5
+    assert lawn_grass.quantity == 5
+    assert lawn_grass.country == 'test_country'
+    assert lawn_grass.germination_period == 'test_days'
+    assert lawn_grass.color == 'test_color'
