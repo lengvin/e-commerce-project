@@ -19,9 +19,12 @@ class Category:
         return f'{self.name}, количество продуктов: {category_products_count}'
 
     def add_product(self, product):
-        if product not in self.__products:
-            self.__products.append(product)
-            Category.product_count += 1
+        if isinstance(product, Product):
+            if product not in self.__products:
+                self.__products.append(product)
+                Category.product_count += 1
+        else:
+            raise TypeError
 
     @property
     def products(self):
@@ -94,3 +97,50 @@ class Product:
                         print('Некорректный ввод, повторите попытку')
             else:
                 self.__price = new_price
+
+
+class Smartphone(Product):
+    name: str
+    description: str
+    price: float
+    quantity: int
+    efficiency: float
+    model: str
+    memory: int
+    color: str
+
+    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+    def __add__(self, other):
+        if type(self) == type(other):
+            return super().__add__(other)
+        else:
+            raise TypeError
+
+
+class LawnGrass(Product):
+    name: str
+    description: str
+    price: float
+    quantity: int
+    country: str
+    germination_period: str
+    color: str
+
+    def __init__(self, name, description, price, quantity, country, germination_period, color):
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
+
+    def __add__(self, other):
+        if type(self) == type(other):
+            return super().__add__(other)
+        else:
+            raise TypeError
+
