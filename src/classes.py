@@ -38,14 +38,16 @@ class Category:
 
 
 class MixinLog:
-    pass
+    def __init__(self):
+        print(self.__repr__())
+        super().__init__()
 
 
 class BaseProduct(ABC):
 
     @abstractmethod
     def __init__(self):
-        pass
+        super().__init__()
 
     @abstractmethod
     def __add__(self, other):
@@ -56,7 +58,7 @@ class BaseProduct(ABC):
         pass
 
 
-class Product(BaseProduct):
+class Product(BaseProduct, MixinLog):
     """Класс для продукта"""
     name: str
     description: str
@@ -70,6 +72,7 @@ class Product(BaseProduct):
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
         Product.all_products[self.name] = self
 
@@ -80,7 +83,6 @@ class Product(BaseProduct):
         result = self.__price * self.quantity + other.price * other.quantity
         return result
 
-    @abstractmethod
     def __repr__(self):
         return f'{self.__class__}({self.name}, {self.description}, {self.price}, {self.quantity})'
 
