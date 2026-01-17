@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+
+
 class Category:
     """Класс для категории товара"""
     name: str
@@ -34,7 +37,26 @@ class Category:
         return result
 
 
-class Product:
+class MixinLog:
+    pass
+
+
+class BaseProduct(ABC):
+
+    @abstractmethod
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @abstractmethod
+    def __repr__(self):
+        pass
+
+
+class Product(BaseProduct):
     """Класс для продукта"""
     name: str
     description: str
@@ -57,6 +79,10 @@ class Product:
     def __add__(self, other):
         result = self.__price * self.quantity + other.price * other.quantity
         return result
+
+    @abstractmethod
+    def __repr__(self):
+        return f'{self.__class__}({self.name}, {self.description}, {self.price}, {self.quantity})'
 
     @classmethod
     def new_product(cls, data):
@@ -122,6 +148,10 @@ class Smartphone(Product):
         else:
             raise TypeError
 
+    def __repr__(self):
+        return (f'{self.__class__}({self.name}, {self.description}, {self.price}, {self.quantity}, {self.efficiency},'
+                f' {self.model}, {self.memory}, {self.color})')
+
 
 class LawnGrass(Product):
     name: str
@@ -144,3 +174,6 @@ class LawnGrass(Product):
         else:
             raise TypeError
 
+    def __repr__(self):
+        return (f'{self.__class__}({self.name}, {self.description}, {self.price}, {self.quantity}, {self.country},'
+                f' {self.germination_period}, {self.color})')
