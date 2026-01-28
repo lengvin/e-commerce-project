@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+
+
 class Category:
     """Класс для категории товара"""
     name: str
@@ -34,7 +37,28 @@ class Category:
         return result
 
 
-class Product:
+class MixinLog:
+    def __init__(self):
+        print(self.__repr__())
+        super().__init__()
+
+
+class BaseProduct(ABC):
+
+    @abstractmethod
+    def __init__(self):
+        super().__init__()
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @abstractmethod
+    def __repr__(self):
+        pass
+
+
+class Product(BaseProduct, MixinLog):
     """Класс для продукта"""
     name: str
     description: str
@@ -48,6 +72,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
         Product.all_products[self.name] = self
 
@@ -57,6 +82,9 @@ class Product:
     def __add__(self, other):
         result = self.__price * self.quantity + other.price * other.quantity
         return result
+
+    def __repr__(self):
+        return f'{self.__class__}({self.name}, {self.description}, {self.price}, {self.quantity})'
 
     @classmethod
     def new_product(cls, data):
@@ -110,17 +138,21 @@ class Smartphone(Product):
     color: str
 
     def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
-        super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
         self.model = model
         self.memory = memory
         self.color = color
+        super().__init__(name, description, price, quantity)
 
     def __add__(self, other):
         if type(self) == type(other):
             return super().__add__(other)
         else:
             raise TypeError
+
+    def __repr__(self):
+        return (f'{self.__class__}({self.name}, {self.description}, {self.price}, {self.quantity}, {self.efficiency},'
+                f' {self.model}, {self.memory}, {self.color})')
 
 
 class LawnGrass(Product):
@@ -133,10 +165,10 @@ class LawnGrass(Product):
     color: str
 
     def __init__(self, name, description, price, quantity, country, germination_period, color):
-        super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period
         self.color = color
+        super().__init__(name, description, price, quantity)
 
     def __add__(self, other):
         if type(self) == type(other):
@@ -144,3 +176,6 @@ class LawnGrass(Product):
         else:
             raise TypeError
 
+    def __repr__(self):
+        return (f'{self.__class__}({self.name}, {self.description}, {self.price}, {self.quantity}, {self.country},'
+                f' {self.germination_period}, {self.color})')

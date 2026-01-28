@@ -44,9 +44,9 @@ def smartphone():
 
 
 @pytest.fixture
-def law_grass():
-    test_law_grass = LawnGrass('test_name', 'test_description', 5, 5, 'test_country', 'test_days', 'test_color')
-    return test_law_grass
+def lawn_grass():
+    test_lawn_grass = LawnGrass('test_name', 'test_description', 5, 5, 'test_country', 'test_days', 'test_color')
+    return test_lawn_grass
 
 
 def test_init_product(some_product):
@@ -64,7 +64,10 @@ def test_init_category(some_category, some_product):
     assert some_category.product_count == 1
 
 
-def test_new_product(new_product):
+def test_new_product(new_product, capsys):
+    test_log_product = Product('test_new_product', 'test_new_description', 5000.0, 6)
+    captured = capsys.readouterr()
+    assert captured.out == "<class 'src.classes.Product'>(test_new_product, test_new_description, 5000.0, 6)\n"
     assert new_product.name == 'test_new_product'
     assert new_product.description == 'test_new_description'
     assert new_product.price == 5000.0
@@ -86,7 +89,10 @@ def test_sum_products():
     assert result == 28
 
 
-def test_init_smartphone(smartphone):
+def test_init_smartphone(smartphone, capsys):
+    test_log_smartphone = Smartphone('test_name', 'test_description', 10, 10, 90.5, 'test_model', 256, 'test_color')
+    captured = capsys.readouterr()
+    assert captured.out == "<class 'src.classes.Smartphone'>(test_name, test_description, 10, 10, 90.5, test_model, 256, test_color)\n"
     assert smartphone.name == 'test_name'
     assert smartphone.description == 'test_description'
     assert smartphone.price == 10
@@ -97,11 +103,14 @@ def test_init_smartphone(smartphone):
     assert smartphone.color == 'test_color'
 
 
-def test_init_law_grass(law_grass):
-    assert law_grass.name == 'test_name'
-    assert law_grass.description == 'test_description'
-    assert law_grass.price == 5
-    assert law_grass.quantity == 5
-    assert law_grass.country == 'test_country'
-    assert law_grass.germination_period == 'test_days'
-    assert law_grass.color == 'test_color'
+def test_init_lawn_grass(lawn_grass, capsys):
+    test_log_law_grass = LawnGrass('test_name', 'test_description', 5, 5, 'test_country', 'test_days', 'test_color')
+    captured = capsys.readouterr()
+    assert captured.out == "<class 'src.classes.LawnGrass'>(test_name, test_description, 5, 5, test_country, test_days, test_color)\n"
+    assert lawn_grass.name == 'test_name'
+    assert lawn_grass.description == 'test_description'
+    assert lawn_grass.price == 5
+    assert lawn_grass.quantity == 5
+    assert lawn_grass.country == 'test_country'
+    assert lawn_grass.germination_period == 'test_days'
+    assert lawn_grass.color == 'test_color'
