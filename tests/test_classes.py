@@ -114,3 +114,16 @@ def test_init_lawn_grass(lawn_grass, capsys):
     assert lawn_grass.country == 'test_country'
     assert lawn_grass.germination_period == 'test_days'
     assert lawn_grass.color == 'test_color'
+
+
+def test_zero_quantity_err():
+    with pytest.raises(ValueError, match='Кол-во товаров не может быть меньше или равняться нулю'):
+        zero_product = Product('test_name', 'test_description', 10, 0)
+
+
+def test_middle_price(some_category):
+    empty_category = Category('empty', 'empty', [])
+    middle_price = some_category.middle_price()
+    empty_middle_price = empty_category.middle_price()
+    assert middle_price == 1000.0
+    assert empty_middle_price == 0

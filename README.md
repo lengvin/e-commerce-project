@@ -13,7 +13,7 @@ git clone https://github.com/lengvin/e-commerce-project.git
 
 ## Тестирование:
 
-Все модули покрыты тестами на 86%
+Все модули покрыты тестами на 87%
 
 ## Модуль classes.py
 
@@ -34,6 +34,15 @@ from classes import Category
 
 category = Category(name, description, [product1])
 category.add_product(product2)
+```
+
+#### Метод middle_price
+Метод для подсчета средней цены товаров в одной категории, пример использования
+```
+from classes import Category
+
+category = Category(name, description, [product1, product2])
+average_price = category.moddle_price()
 ```
 
 ### Класс Product

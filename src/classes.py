@@ -36,6 +36,13 @@ class Category:
             result += str(product) + ' \n'
         return result
 
+    def middle_price(self):
+        try:
+            float_middle_price = round(sum([x.price for x in self.__products]) / len(self.__products), 2)
+            return float_middle_price
+        except ZeroDivisionError:
+            return 0
+
 
 class MixinLog:
     def __init__(self):
@@ -73,6 +80,9 @@ class Product(BaseProduct, MixinLog):
         self.__price = price
         self.quantity = quantity
         super().__init__()
+
+        if self.quantity <= 0:
+            raise ValueError('Кол-во товаров не может быть меньше или равняться нулю')
 
         Product.all_products[self.name] = self
 
