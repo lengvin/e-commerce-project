@@ -36,6 +36,13 @@ class Category:
             result += str(product) + ' \n'
         return result
 
+    def middle_price(self):
+        try:
+            float_middle_price = round(sum([x.price for x in self.__products]) / len(self.__products), 2)
+            return float_middle_price
+        except ZeroDivisionError:
+            return 0
+
 
 class MixinLog:
     def __init__(self):
