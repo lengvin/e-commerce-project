@@ -74,6 +74,9 @@ class Product(BaseProduct, MixinLog):
         self.quantity = quantity
         super().__init__()
 
+        if self.quantity <= 0:
+            raise ValueError('Кол-во товаров не может быть меньше или равняться нулю')
+
         Product.all_products[self.name] = self
 
     def __str__(self):
